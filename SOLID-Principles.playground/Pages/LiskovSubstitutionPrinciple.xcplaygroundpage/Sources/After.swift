@@ -1,53 +1,42 @@
 import Foundation
 
-fileprivate protocol Polygon {
-    func calculateArea() -> Float
+// MARK: Example extracted from: https://betterprogramming.pub/solid-swift-by-examples-part-three-675672c1ec20
+//       Thanks Piero Sifuentes!
+
+fileprivate struct User {}
+
+fileprivate protocol UserService {
+    func fetchUser(with username: String, password: String, completion: @escaping (_ user: User?, _ error: Error?) -> Void)
 }
 
-fileprivate class Rectangle: Polygon {
-    
-    var width: Float = 0
-    var height: Float = 0
-    
-    func set(width: Float) {
-        self.width = width
-    }
-    
-    func set(height: Float) {
-        self.height = height
-    }
-    
-    func calculateArea() -> Float {
-        return width * height
-    }
+fileprivate protocol UserPhotoService {
+    func fetchUserPhoto(with username: String, completion: @escaping (_ photo: Data?, _ error: Error?) -> Void)
 }
 
-fileprivate class Square: Polygon {
-    var side: Float = 0
-    
-    func set(side: Float) {
-        self.side = side
+fileprivate class ApiUserService: UserService, UserPhotoService {
+    func fetchUser(with username: String, password: String, completion: @escaping (_ user: User?, _ error: Error?) -> Void) {
+        // HERE MAKE AN API REQUEST AND RETURN USER AND/OR ERROR
+        print("API REQUEST HERE")
+        let parsedAPIUser = User()
+        completion(parsedAPIUser, nil)
     }
     
-    func calculateArea() -> Float {
-        return pow(side, 2)
+    func fetchUserPhoto(with username: String, completion: @escaping (_ photo: Data?, _ error: Error?) -> Void) {
+        print("API REQUEST HERE")
+        let downloadedPhotoData = Data()
+        completion(downloadedPhotoData, nil)
     }
 }
 
-// the client may have this method
-fileprivate func printArea(of polygon: Polygon) {
-    print(polygon.calculateArea())
+// MARK: Now, DatabaseUserService implements only what it supports
+
+fileprivate class DatabaseUserService: UserService {
+
+    func fetchUser(with username: String, password: String, completion: @escaping (_ user: User?, _ error: Error?) -> Void) {
+        // HERE MAKE A DB REQUEST AND RETURN USER AND/OR ERROR
+        print("DB REQUEST HERE")
+        let parsedDBUser = User()
+        completion(parsedDBUser, nil)
+    }
+
 }
-
-/* Case
- 
-private let rectangle = Rectangle()
-rectangle.set(width: 5)
-rectangle.set(height: 4)
-printArea(of: rectangle)
-
-private let square = Square()
-square.set(side: 4)
-printArea(of: square)
-
- */

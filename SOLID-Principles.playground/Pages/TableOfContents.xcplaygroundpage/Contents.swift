@@ -17,5 +17,7 @@
  * [Wikipedia](https://en.wikipedia.org/wiki/SOLID)
  * [macrosantadev.com](https://marcosantadev.com/solid-principles-applied-swift/)
  * [codeburst.io](https://codeburst.io/solid-design-principle-using-swift-fa67443672b8)
-
+ 
+ Playground forked from https://github.com/omerfarukozturk/SOLID-Principles
+ Thank you Ömer Faruk Öztürk
  */

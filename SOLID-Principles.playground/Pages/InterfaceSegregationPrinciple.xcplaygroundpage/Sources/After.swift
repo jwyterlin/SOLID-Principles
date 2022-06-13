@@ -1,40 +1,20 @@
+fileprivate struct Store {}
 
-import Foundation
-
-fileprivate protocol Workable {
-    func work()
+fileprivate protocol LoadingDisplayable {
+    func showLoading()
+    func hideLoading()
 }
 
-fileprivate protocol Feedable {
-    func eat()
+fileprivate protocol StoreListFeedback {
+    func didLoadStores(_ stores: [Store])
+    func didFailLoadingStores(error: Error)
 }
 
-fileprivate class Human: Workable, Feedable {
-    
-    func work() {
-        print("Human working..")
-    }
-    
-    func eat() {
-        print("Human eating..")
-    }
+fileprivate protocol StoresViewModelDelegate: LoadingDisplayable, StoreListFeedback {}
+
+fileprivate class StoresMapViewController: StoresViewModelDelegate {
+    func showLoading() {}
+    func hideLoading() {}
+    func didLoadStores(_ stores: [Store]) {}
+    func didFailLoadingStores(error: Error) {}
 }
-
-fileprivate class Robot: Workable {
-    
-    func work() {
-        print("Robot working..")
-    }
-}
-
-/* Case:
- 
-private let human = Human()
-human.eat() // prints "Human eating"
-human.work() // prints "Human working"
-
-private let robot = Robot()
-robot.work() // prints "Robot working.."
-robot.eat() // Compile type error "Value of type 'Robot' has no member 'eat'"
- 
-*/

@@ -1,29 +1,27 @@
 import Foundation
 
-fileprivate class Handler {
-    
-    func handle() {
-        // load data from API
-        let data = loadData()
-        
-        // parse downloaded data
-        let list = parse(data: data)
-        
-        // save model to db
-        save(model: list)
+fileprivate class ProductsViewController {
+
+    var products: [Product] = []
+
+    func loadProducts() {}
+
+    func showLoading() {}
+
+    func hideLoading() {}
+
+    func updateList() {}
+
+    func addProduct(product: Product) {}
+
+    func removeProduct(product: Product) {}
+
+    func saveProducts() {
+        // Save products using Core Data
     }
-    
-    func loadData() -> Data {
-        // get data from API
-        return Data()
-    }
-    
-    func parse(data: Data) -> Any {
-        // parse given data
-        return ""
-    }
-    
-    func save(model: Any) {
-        // save data model to local storage
-    }
+
+    func sendAnalyticsEvent() {}
+
 }
+
+fileprivate struct Product {}

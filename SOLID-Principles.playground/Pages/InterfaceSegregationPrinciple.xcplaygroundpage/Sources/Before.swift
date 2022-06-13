@@ -1,41 +1,17 @@
-
 import Foundation
 
-fileprivate protocol Worker {
-    func work()
-    func eat()
+fileprivate struct Store {}
+
+fileprivate protocol StoresViewModelDelegate {
+    func showLoading()
+    func hideLoading()
+    func didLoadStores(_ stores: [Store])
+    func didFailLoadingStores(error: Error)
 }
 
-fileprivate class Human: Worker {
-    
-    func work() {
-        print("Human working..")
-    }
-    
-    func eat() {
-        print("Human eating..")
-    }
+fileprivate class StoresMapViewController: StoresViewModelDelegate {
+    func showLoading() {}
+    func hideLoading() {}
+    func didLoadStores(_ stores: [Store]) {}
+    func didFailLoadingStores(error: Error) {}
 }
-
-fileprivate class Robot: Worker {
-    
-    func work() {
-        print("Robot working..")
-    }
-    
-    func eat() {
-        fatalError("Robot doesn't eat!")
-    }
-}
-
-/* Case:
-
- private let human = Human()
- human.eat() // prints "Human eating"
- human.work() // prints "Human working"
- 
- private let robot = Robot()
- robot.work() // prints "Robot working.."
- robot.eat() // Fatal error: "Robot doesn't eat!"
-
-*/
